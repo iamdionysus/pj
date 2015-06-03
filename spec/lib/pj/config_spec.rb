@@ -4,19 +4,9 @@ require "helper"
 
 RSpec.describe Pj::Config do
   let(:config_file_name) { File.join ENV["HOME"], "pj.json" }
-  let(:config) { { "repository" => { "pj" => File.dirname(__FILE__) } } }
-  before(:context) do
-    config = { repository: { pj: File.dirname(__FILE__) } }
-    config_file_name = File.join ENV["HOME"], "pj.json"
-    backup config_file_name
-    File.open(config_file_name, "w") { |f| JSON.dump config, f }
-  end
-
-  after(:context) do
-    config_file_name = File.join ENV["HOME"], "pj.json"
-    rm config_file_name
-    restore config_file_name
-  end
+  let(:config) { { "repository" => { "pj" => File.expand_path("../../../../", __FILE__) } } }
+  before(:context) { create_config_backup }
+  after(:context) { restore_config_backup }
 
   describe "#config_file_name" do
     it "returns config file name" do

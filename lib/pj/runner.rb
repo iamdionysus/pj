@@ -1,5 +1,4 @@
 require "thor"
-require "clipboard"
 require "pj"
 
 class Module
@@ -13,7 +12,6 @@ module Pj
     Pj::Config.projects.each do |p|
       desc("#{p} [sync|push|owner|cd]", "manages #{p} project")
       task(p.to_sym) do |args = nil|
-        repository = Pj::Config.repository p
         case args
         when "sync"
           puts "sync"
@@ -22,10 +20,7 @@ module Pj
         when "owner"
           puts "owner"
         when "cd"
-          cmd = "cd #{repository}"
-          Clipboard.copy cmd
-          puts "#{cmd} copied to your clipboard. Paste and change directory"
-          puts 
+          invoke "pj:base:cd", [p]
         end
       end
     end
