@@ -18,7 +18,25 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### sync
+Syncing a fork from upstream with [the following instruction](https://help.github.com/articles/syncing-a-fork/)
+
+	$ pj project-name-in-config-file sync
+
+### push
+Runs git push origin master
+
+	$ pj project-name push
+
+### owner
+Assuming you have upstream, pushes to both upstream and origin
+
+	$ pj project owner
+
+### cd
+Copy to cliboard `cd project-directory-name` command.
+
+	$ pj project cd
 
 ## Contributing
 
