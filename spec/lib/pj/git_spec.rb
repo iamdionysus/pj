@@ -26,7 +26,7 @@ RSpec.describe Pj::Git do
         touch "test.txt"
         expect(subject.commit "added test.txt").not_to be_empty
         rm "test.txt"
-        exepct(subject.commit "removed test.txt").not_to be_empty
+        expect(subject.commit "removed test.txt").not_to be_empty
       end
     end
 
