@@ -9,19 +9,20 @@ end
 
 module Pj
   class Runner < Thor
-    Pj::Config.projects.each do |p|
-      desc("#{p} [sync|push|owner|cd]", "manages #{p} project")
-      define_method(p.to_sym) do |*args|
+    Pj::Config.projects.each do |project|
+      desc("#{project} [sync|push|owner|cd]", "manages #{project} project")
+      define_method(project.to_sym) do |*args|
         case args.shift
         when "sync"
-          invoke "pj:base:sync", [p]
+          invoke "pj:base:sync", [project]
         when "push"
-          puts args.first
-          invoke "pj:base:push", [p, args.first]
+          branch = args.shift || "master"
+          invoke "pj:base:push", [project, branch]
         when "owner"
-          invoke "pj:base:owner", [p, args.first]
+          branch = args.shift || "master"          
+          invoke "pj:base:owner", [project, branch]
         when "cd"
-          invoke "pj:base:cd", [p]
+          invoke "pj:base:cd", [project]
         end
       end
     end

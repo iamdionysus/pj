@@ -17,14 +17,14 @@ module Pj
     end
 
     desc "push", "git push origin [branch]"
-    def push(project, branch = "master")
+    def push(project, branch)
       repo = Pj::Git.new project
       repo.check_commit
       repo.push("origin", branch)
     end
 
     desc "owner", "git push origin and upstream [branch]"
-    def owner(project, branch = "master")
+    def owner(project, branch)
       repo = Pj::Git.new project
       if repo.upstream? && repo.origin?
         repo.check_commit
