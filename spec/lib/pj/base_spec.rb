@@ -7,9 +7,9 @@ RSpec.describe Pj::Base do
 
   describe "#cd" do
     it "return cd command for the project" do
-      subject.cd "pj"
       repo = Pj::Config.repository "pj"
       cmd = "cd #{repo}"
+      subject.cd "pj"
       expect(Clipboard.paste).to eq(cmd)
     end
   end
