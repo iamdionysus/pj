@@ -15,6 +15,11 @@ module Pj
       msg.include? "upstream"
     end
 
+    def origin?
+      msg = git "remote --verbose"
+      msg.include? "origin"
+    end
+
     def check_commit
       return unless needs_commit?
       puts status_short

@@ -18,7 +18,7 @@ module Pj
         when "push"
           invoke "pj:base:push", [p, args.first]
         when "owner"
-          puts "owner"
+          invoke "pj:base:owner", [p, args.first]
         when "cd"
           invoke "pj:base:cd", [p]
         end

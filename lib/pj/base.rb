@@ -12,7 +12,7 @@ module Pj
         repo.check_commit
         repo.git "merge upstream/master"
       else
-        puts "You don't have any upstream to sync"
+        puts "Nothing to do. You don't have any upstream to sync"
       end
     end
 
@@ -22,7 +22,18 @@ module Pj
       repo.check_commit
       repo.push("origin", branch)
     end
-
+    
+    desc "owner", "git push origin and upstream [branch]"
+    def owner(project, branch = "master")
+      repo = Pj::Git.new project
+      if repo.upstream? && repo.origin?
+        repo.check_commit
+        repo.push("origin", branch)
+        repo.push("upstream", branch)
+      else
+        puts "Nothing to do. You don't have origin && upstream"
+      end
+    end
     desc "cd", "copys cd to-repository command to clipboard"
     def cd(project)
       repo_dir = repository(project)
@@ -31,7 +42,6 @@ module Pj
       puts "#{cmd} copied to your clipboard. Paste and change directory"
       cmd
     end
-
 
     private
 
