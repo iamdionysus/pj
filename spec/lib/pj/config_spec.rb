@@ -32,14 +32,14 @@ RSpec.describe Pj::Config do
     end
   end
 
-  describe "#repository" do
+  describe "#repo_dir" do
     it "returns repository directory given correct name" do
       expected = config["repository"]["pj"]
-      expect(subject.repository("pj")).to eq(expected)
+      expect(subject.repo_dir("pj")).to eq(expected)
     end
 
     it "returns nil given wrong name" do
-      expect(subject.repository("wrong")).to be_nil
+      expect(subject.repo_dir("wrong")).to be_nil
     end
   end
 end

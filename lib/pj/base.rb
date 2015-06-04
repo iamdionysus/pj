@@ -7,7 +7,7 @@ module Pj
     desc "sync", "git fetch upstream and merge upstream/master"
     option aliases: :s
     def sync(project = nil)
-      project = my_class_name if project.nil?
+      project = self_class_name if project.nil?
       repo = Pj::Git.new project
       if repo.upstream?
         repo.git "fetch upstream"
@@ -21,7 +21,7 @@ module Pj
     desc "push", "git push origin [branch]"
     option aliases: :p
     def push(project = nil, branch = "master")
-      project = my_class_name if project.nil?
+      project = self_class_name if project.nil?
       repo = Pj::Git.new project
       repo.check_commit
       repo.push("origin", branch)
@@ -30,7 +30,7 @@ module Pj
     desc "owner", "git push origin and upstream [branch]"
     option aliases: :o
     def owner(project = nil, branch = "master")
-      project = my_class_name if project.nil?
+      project = self_class_name if project.nil?
       repo = Pj::Git.new project
       if repo.upstream? && repo.origin?
         repo.check_commit
@@ -41,29 +41,34 @@ module Pj
       end
     end
 
-    desc "cd", "copys cd to-repository command to clipboard"
+    desc "cd", "copys cd to-repo_dir command to clipboard"
     def cd(project = nil)
-      project = my_class_name if project.nil?
-      repo_dir = repository(project)
+      project = self_class_name if project.nil?
+      repo_dir = repo_dir(project)
       cmd = "cd #{repo_dir}"
       Clipboard.copy cmd
       puts "#{cmd} copied to your clipboard. Paste and change directory"
       cmd
     end
 
+    no_tasks do
+      def my_repo_dir
+        repo_dir(self_class_name)
+      end
+    end
+
     private
 
-    def my_class_name
+    def self_class_name
       self.class.name.downcase.split("::").last
     end
 
-    def repository(project)
-      Pj::Config.repository project
+    def repo_dir(project)
+      Pj::Config.repo_dir project
     end
 
     def run_inside_repo
-      repo_dir = repository(my_class_name)
-      Dir.chdir(repo_dir) do
+      Dir.chdir(my_repo_dir) do
         yield
       end
     end

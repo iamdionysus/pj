@@ -7,8 +7,8 @@ module Pj
         @instance ||= new
       end
 
-      def repository(name)
-        instance.repository name
+      def repo_dir(name)
+        instance.repo_dir name
       end
 
       def projects
@@ -20,7 +20,7 @@ module Pj
       @config = load_config
     end
 
-    def repository(name)
+    def repo_dir(name)
       return nil unless @config.key?("repository")
       @config["repository"].fetch(name, nil)
     end
