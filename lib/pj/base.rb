@@ -21,7 +21,7 @@ module Pj
     desc "push", "git push origin [branch]"
     option aliases: :p
     def push(project = nil, branch = "master")
-      project = my_class_name if project.nil?      
+      project = my_class_name if project.nil?
       repo = Pj::Git.new project
       repo.check_commit
       repo.push("origin", branch)
@@ -30,7 +30,7 @@ module Pj
     desc "owner", "git push origin and upstream [branch]"
     option aliases: :o
     def owner(project = nil, branch = "master")
-      project = my_class_name if project.nil?      
+      project = my_class_name if project.nil?
       repo = Pj::Git.new project
       if repo.upstream? && repo.origin?
         repo.check_commit
