@@ -5,6 +5,7 @@ require "pj"
 module Pj
   class Base < Thor
     desc "sync", "git fetch upstream and merge upstream/master"
+    option aliases: :s
     def sync(project = nil)
       project = my_class_name if project.nil?
       repo = Pj::Git.new project
@@ -18,6 +19,7 @@ module Pj
     end
 
     desc "push", "git push origin [branch]"
+    option aliases: :p
     def push(project = nil, branch = "master")
       project = my_class_name if project.nil?      
       repo = Pj::Git.new project
@@ -26,6 +28,7 @@ module Pj
     end
 
     desc "owner", "git push origin and upstream [branch]"
+    option aliases: :o
     def owner(project = nil, branch = "master")
       project = my_class_name if project.nil?      
       repo = Pj::Git.new project

@@ -13,12 +13,12 @@ module Pj
       desc("#{project} [sync|push|owner|cd]", "manages #{project} project")
       define_method(project.to_sym) do |*args|
         case args.shift
-        when "sync"
+        when "sync", "s"
           invoke "pj:base:sync", [project]
-        when "push"
+        when "push", "p"
           branch = args.shift || "master"
           invoke "pj:base:push", [project, branch]
-        when "owner"
+        when "owner", "o"
           branch = args.shift || "master"
           invoke "pj:base:owner", [project, branch]
         when "cd"
