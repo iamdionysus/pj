@@ -11,7 +11,7 @@ module Pj
     end
 
     def commit(msg)
-      git "commit --all --message='#{msg}'"
+      git "commit --all --message=\"#{msg}\""
     end
 
     def status
