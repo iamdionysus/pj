@@ -11,12 +11,13 @@ module Pj
   class Runner < Thor
     Pj::Config.projects.each do |p|
       desc("#{p} [sync|push|owner|cd]", "manages #{p} project")
-      task(p.to_sym) do |args = nil|
-        case args
+      define_method(p.to_sym) do |*args|
+        case args.shift
         when "sync"
           puts "sync"
         when "push"
-          puts "push"
+          puts "#{args}"
+          invoke "pj:base:push", [p, args.first]
         when "owner"
           puts "owner"
         when "cd"

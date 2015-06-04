@@ -14,7 +14,7 @@ module Pj
 
     desc "push", "git push origin [branch]"
     def push(project, branch = "master")
-      git = Pj::Git project
+      git = Pj::Git.new project
       if git.needs_commit?
         puts git.status_short
         puts "you have to commit the above changes first"

@@ -20,5 +20,19 @@ RSpec.describe Pj::Git do
         expect(message).to match(/On branch/)
       end
     end
+
+    describe "#commit" do
+      it "commits message" do
+        touch "test.txt"
+        expect(subject.commit "added test.txt").to be true
+        rm "test.txt"
+        exepct(subject.commit "removed test.txt").to be true
+      end
+    end
+
+    describe "#push" do
+      it "push to remote" do
+      end
+    end
   end
 end
