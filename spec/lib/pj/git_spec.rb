@@ -3,7 +3,7 @@ require "helper"
 RSpec.describe Pj::Git do
   before(:context) do
     create_config_backup
-    # touch "test.txt"
+    touch "test.txt"
   end
 
   after(:context) do
