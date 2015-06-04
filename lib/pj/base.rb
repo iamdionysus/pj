@@ -60,5 +60,12 @@ module Pj
     def repository(project)
       Pj::Config.repository project
     end
+
+    def run_inside_repo
+      repo_dir = repository(my_class_name)
+      Dir.chdir(repo_dir) do
+        yield
+      end
+    end
   end
 end
