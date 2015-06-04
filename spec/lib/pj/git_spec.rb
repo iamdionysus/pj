@@ -21,14 +21,15 @@ RSpec.describe Pj::Git do
       end
     end
 
-    describe "#commit" do
-      it "commits message" do
-        touch "test.txt"
-        expect(subject.commit "added test.txt").not_to be_empty
-        rm "test.txt"
-        expect(subject.commit "removed test.txt").not_to be_empty
-      end
-    end
+    # it creates commit messages too much
+    # describe "#commit" do
+    #   it "commits message" do
+    #     touch "test.txt"
+    #     expect(subject.commit "added test.txt").not_to be_empty
+    #     rm "test.txt"
+    #     expect(subject.commit "removed test.txt").not_to be_empty
+    #   end
+    # end
 
     describe "#push" do
       it "push to remote" do

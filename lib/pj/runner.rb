@@ -14,9 +14,8 @@ module Pj
       define_method(p.to_sym) do |*args|
         case args.shift
         when "sync"
-          puts "sync"
+          invoke "pj:base:sync", [p]
         when "push"
-          puts "#{args}"
           invoke "pj:base:push", [p, args.first]
         when "owner"
           puts "owner"

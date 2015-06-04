@@ -10,6 +10,20 @@ module Pj
       status_short.empty? ? false : true
     end
 
+    def upstream?
+      msg = git "remote --verbose"
+      msg.include? "upstream"
+    end
+
+    def check_commit
+      return unless needs_commit?
+      puts status_short
+      puts "you have to commit the above changes first"
+      puts "enter commit message:"
+      msg = STDIN.gets.chomp
+      commit msg
+    end
+
     def commit(msg)
       git "add --all"
       git "commit --all --message=\"#{msg}\""
