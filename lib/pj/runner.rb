@@ -1,12 +1,6 @@
 require "thor"
 require "pj"
 
-class Module
-  def task(name, &block)
-    define_method(name, &block)
-  end
-end
-
 module Pj
   class Runner < Thor
     Pj::Config.projects.each do |project|
