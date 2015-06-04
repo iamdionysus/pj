@@ -5,7 +5,8 @@ require "pj"
 module Pj
   class Base < Thor
     desc "sync", "git fetch upstream and merge upstream/master"
-    def sync(project)
+    def sync(project = nil)
+      project = my_class_name if project.nil?
       repo = Pj::Git.new project
       if repo.upstream?
         repo.git "fetch upstream"
@@ -17,14 +18,16 @@ module Pj
     end
 
     desc "push", "git push origin [branch]"
-    def push(project, branch)
+    def push(project = nil, branch = "master")
+      project = my_class_name if project.nil?
       repo = Pj::Git.new project
       repo.check_commit
       repo.push("origin", branch)
     end
 
     desc "owner", "git push origin and upstream [branch]"
-    def owner(project, branch)
+    def owner(project = nil, branch = "master")
+      project = my_class_name if project.nil?
       repo = Pj::Git.new project
       if repo.upstream? && repo.origin?
         repo.check_commit
@@ -34,8 +37,11 @@ module Pj
         puts "Nothing to do. You don't have origin && upstream"
       end
     end
+
     desc "cd", "copys cd to-repository command to clipboard"
-    def cd(project)
+    def cd(project = nil)
+      project = my_class_name if project.nil?
+      puts "project = #{project}"
       repo_dir = repository(project)
       cmd = "cd #{repo_dir}"
       Clipboard.copy cmd
@@ -44,6 +50,10 @@ module Pj
     end
 
     private
+
+    def my_class_name
+      self.class.name.downcase.split("::").last
+    end
 
     def repository(project)
       Pj::Config.repository project

@@ -3,7 +3,14 @@ require "helper"
 
 RSpec.describe Pj::Config do
   let(:config_file_name) { File.join ENV["HOME"], "pj.json" }
-  let(:config) { { "repository" => { "pj" => File.expand_path("../../../../", __FILE__) } } }
+  let(:config) do
+    { "repository" =>
+      {
+        "pj" => File.expand_path("../../../../", __FILE__),
+        "base" => "base"
+      }
+    }
+  end
   before(:context) { create_config_backup }
   after(:context) { restore_config_backup }
 
@@ -21,7 +28,7 @@ RSpec.describe Pj::Config do
 
   describe "#projects" do
     it "returns all projects name in config" do
-      expect(subject.projects).to eq(["pj"])
+      expect(subject.projects).to eq(%w(pj base))
     end
   end
 
