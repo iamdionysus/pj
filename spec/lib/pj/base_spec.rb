@@ -1,4 +1,3 @@
-require "clipboard"
 require "helper"
 
 RSpec.describe Pj::Base do
@@ -8,9 +7,9 @@ RSpec.describe Pj::Base do
   describe "#cd" do
     it "return cd command for the project" do
       repo = Pj::Config.repository "pj"
-      cmd = "cd #{repo}"
-      subject.cd "pj"
-      expect(Clipboard.paste).to eq(cmd)
+      expected = "cd #{repo}"
+      cmd = subject.cd "pj"
+      expect(cmd).to eq(expected)
     end
   end
 

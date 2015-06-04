@@ -10,6 +10,7 @@ module Pj
       cmd = "cd #{repo}"
       Clipboard.copy cmd
       puts "#{cmd} copied to your clipboard. Paste and change directory"
+      cmd
     end
 
     desc "push", "git push origin [branch]"
