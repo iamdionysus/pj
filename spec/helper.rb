@@ -31,7 +31,7 @@ def touch(file_name)
 end
 
 def rm(file_name)
-  FileUtils.rm file_name
+  FileUtils.rm file_name if File.exist? file_name
 end
 
 def restore(file_name)
