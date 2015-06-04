@@ -22,7 +22,7 @@ module Pj
       repo.check_commit
       repo.push("origin", branch)
     end
-    
+
     desc "owner", "git push origin and upstream [branch]"
     def owner(project, branch = "master")
       repo = Pj::Git.new project

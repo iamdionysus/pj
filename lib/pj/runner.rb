@@ -16,6 +16,7 @@ module Pj
         when "sync"
           invoke "pj:base:sync", [p]
         when "push"
+          puts args.first
           invoke "pj:base:push", [p, args.first]
         when "owner"
           invoke "pj:base:owner", [p, args.first]
