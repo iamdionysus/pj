@@ -19,7 +19,7 @@ module Pj
 
     desc "push", "git push origin [branch]"
     def push(project = nil, branch = "master")
-      project = my_class_name if project.nil?
+      project = my_class_name if project.nil?      
       repo = Pj::Git.new project
       repo.check_commit
       repo.push("origin", branch)
@@ -27,7 +27,7 @@ module Pj
 
     desc "owner", "git push origin and upstream [branch]"
     def owner(project = nil, branch = "master")
-      project = my_class_name if project.nil?
+      project = my_class_name if project.nil?      
       repo = Pj::Git.new project
       if repo.upstream? && repo.origin?
         repo.check_commit
@@ -41,7 +41,6 @@ module Pj
     desc "cd", "copys cd to-repository command to clipboard"
     def cd(project = nil)
       project = my_class_name if project.nil?
-      puts "project = #{project}"
       repo_dir = repository(project)
       cmd = "cd #{repo_dir}"
       Clipboard.copy cmd
