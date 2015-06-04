@@ -1,7 +1,6 @@
 require "json"
 require "helper"
 
-
 RSpec.describe Pj::Config do
   let(:config_file_name) { File.join ENV["HOME"], "pj.json" }
   let(:config) { { "repository" => { "pj" => File.expand_path("../../../../", __FILE__) } } }

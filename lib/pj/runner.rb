@@ -19,7 +19,7 @@ module Pj
           branch = args.shift || "master"
           invoke "pj:base:push", [project, branch]
         when "owner"
-          branch = args.shift || "master"          
+          branch = args.shift || "master"
           invoke "pj:base:owner", [project, branch]
         when "cd"
           invoke "pj:base:cd", [project]
