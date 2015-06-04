@@ -13,8 +13,16 @@ module Pj
     end
 
     desc "push", "git push origin [branch]"
-    def push(project, branch)
-      # use ruby-git
+    def push(project, branch = "master")
+      git = Pj::Git project
+      if git.needs_commit?
+        puts git.status_short
+        puts "you have to commit the above changes first"
+        puts "enter commit message:"
+        msg = STDIN.gets.chomp
+        git.commit msg
+      end
+      git.push("origin", branch)
     end
 
     private

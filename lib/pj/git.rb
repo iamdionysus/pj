@@ -22,6 +22,10 @@ module Pj
       git "status --short"
     end
 
+    def push(remote, branch)
+      git "push #{remote} #{branch}"
+    end
+
     def git(cmd)
       Dir.chdir(@repo) { `git #{cmd}` }
     end
