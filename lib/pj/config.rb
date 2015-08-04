@@ -22,7 +22,8 @@ module Pj
 
     def repo_dir(name)
       return nil unless @config.key?("repository")
-      @config["repository"].fetch(name, nil)
+      repo = @config["repository"].fetch(name, nil)
+      File.expand_path repo
     end
 
     def projects
